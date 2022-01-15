@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Synonyms</h1>
+
+<table class="table table table-striped table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>English word</th>
+      <th>Kannada word</th>
+      <th colspan="6"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @synonyms.each do |synonym| %>
+      <tr>
+        <td><%= synonym.english_word %></td>
+        <td><%= synonym.kannada_word %></td>
+        <td><span class ="like_count" <%=synonym.id %>> <%=synonym.get_upvotes.size%> </span>
+        <%= link_to 'TRUE', TRUE_synonym_path(synonym),class:"btn btn-success",method: :put%></td>
+        <td><span class ="dislike_count" <%=synonym.id %>> <%=synonym.get_downvotes.size%></span>
+          <%= link_to 'FALSE',FALSE_synonym_path(synonym),class:"btn btn-danger",method: :put %></td>
+        <td><%= link_to 'Show', synonym %></td>
+        <td><%= link_to 'Edit', edit_synonym_path(synonym) %></td>
+        <td><%= link_to 'Destroy', synonym, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if user_signed_in? %>
+<%= link_to 'New Synonym', new_synonym_path %>
+<%= link_to 'Logout',destroy_user_session_path,method: :delete %>
+<% end %>
+
+

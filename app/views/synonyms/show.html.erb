@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>English word:</strong>
+  <%= @synonym.english_word %>
+</p>
+
+<p>
+  <strong>Kannada word:</strong>
+  <%= @synonym.kannada_word %>
+</p>
+
+<h2>Comments</h2>
+<% @synonym.comments.each do |comment| %>
+
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.comments %>
+  </p>
+<% end %>
+
+<h2> Add comment</h2>
+<%= form_with model:[@synonym,@synonym.comments.build] do |form| %>
+
+
+<div class="field">
+    <%= form.label :Comments %>
+    <%= form.text_area :comments%>
+</div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+  <% end %>
+
+<%= link_to 'Edit', edit_synonym_path(@synonym) %> |
+<%= link_to 'Back', synonyms_path %>
